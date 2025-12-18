@@ -15,7 +15,7 @@
 	},
 	"window.commandCenter": false,
 	"git.autofetch": true,
-	"terminal.integrated.defaultProfile.windows": "nu",
+	"terminal.integrated.defaultProfile.windows": "pwsh",
 	"terminal.integrated.automationProfile.windows": {
 		"path": "c:/scoop/shims/pwsh.exe",
 		"args": []
