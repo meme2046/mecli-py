@@ -37,13 +37,16 @@ def mysql_to_csv(
     query: str,
     update_status: int,
     d_column_names: list[str],
+    pd_dtype: dict | None = None,
+    del_column_names: list[str] = ["id"],
 ) -> int:
     # 查询数据
-    data_frame = pd.read_sql(query, engine)
+    data_frame = pd.read_sql(query, engine, dtype=pd_dtype)
     # 提取 'id' 列
     ids = data_frame["id"].tolist()
     # 删除 'id' 列
-    data_frame = data_frame.drop(columns=["id"])
+    data_frame = data_frame.drop(columns=del_column_names)
+
     # 根据 'open_at' 列降序排序
     # data_frame = data_frame.sort_values(by="open_at", ascending=False)
 
@@ -56,7 +59,7 @@ def mysql_to_csv(
         encoding="utf-8",
     )
     # csv去重,保留最后加入的数据
-    deduplicated(csv_path, d_column_names, "last")
+    deduplicated(csv_path, d_column_names, "last", pd_dtype)
 
     # 根据提取的 'id' 列更新数据库中 up_status 字段
     if ids:

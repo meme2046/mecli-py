@@ -1,17 +1,26 @@
 import typer
 
-from crypto.bitget import grid_close, grid_open, mix_tickers, spot_tickers
+from crypto.bitget import (
+    bitget_sf_close,
+    bitget_sf_open,
+    grid_close,
+    grid_open,
+    mix_tickers,
+    spot_tickers,
+)
 from utils.mysql import get_database_engine
 
 app = typer.Typer()
 
 
 @app.command()
-def sync(env_path: str = "d:/.env", csv_path: str = "d:/github/txnj/data/bitget_0.csv"):
+def sync(env_path: str = "d:/.env"):
     """同步mysql中grid数据到csv文件"""
     engine = get_database_engine(env_path)
-    grid_open(engine, csv_path)
-    grid_close(engine, csv_path)
+    grid_open(engine, "d:/github/meme2046/data/bitget_0.csv")
+    grid_close(engine, "d:/github/meme2046/data/bitget_0.csv")
+    bitget_sf_open(engine, "d:/github/meme2046/data/bitget_sf_0.csv")
+    bitget_sf_close(engine, "d:/github/meme2046/data/bitget_sf_0.csv")
 
 
 @app.command()
