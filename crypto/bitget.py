@@ -3,7 +3,7 @@ from decimal import Decimal
 import requests
 from sqlalchemy import Engine
 
-from utils.mysql import get_database_engine, mysql_to_csv
+from utils.mysql import mysql_to_csv
 
 
 def tickers(url: str, symbols: list, proxy: str | None = None):
@@ -121,6 +121,4 @@ def grid_close(engine: Engine, csv_path: str):
 
 
 if __name__ == "__main__":
-    engine = get_database_engine("d:/.env")
-    # bitget_sf_open(engine, "d:/github/meme2046/data/bitget_sf_0.csv")
-    grid_close(engine, "d:/github/meme2046/data/bitget_0.csv")
+    pass
