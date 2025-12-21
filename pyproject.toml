@@ -12,10 +12,11 @@
         "pandas>=2.3.3",
         "pymysql>=1.1.2",
         "pytz>=2025.2",
+        "pyyaml>=6.0.3",
         "requests[socks]>=2.32.5",
         "sqlalchemy>=2.0.45",
         "typer>=0.20.0",
-    ]
+]
     description = "my cli tool"
     license = { text = "MIT" }
     name = "mecli-py"

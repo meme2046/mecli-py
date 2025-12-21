@@ -22,7 +22,6 @@
 	},
 	// 终端日志级别
 	"terminal.integrated.enablePersistentSessions": true,
-	"terminal.integrated.environmentChangesIndicator": "on",
 	"terminal.integrated.showExitAlert": true,
 	// 📝toml格式化配置
 	"[toml]": {
