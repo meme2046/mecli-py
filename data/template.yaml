@@ -144,7 +144,7 @@ external-controller-cors:
   allow-origins:
     - "*"
 proxies: []
-proxy-providers: []
+proxy-providers: {}
 proxy-groups: []
-rule-providers: []
+rule-providers: {}
 rules: []
