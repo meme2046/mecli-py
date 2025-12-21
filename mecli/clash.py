@@ -1,8 +1,12 @@
+import os
+
 import requests
 import yaml
+from dotenv import load_dotenv
 
 from utils.logger import get_logger
 
+load_dotenv("d:/.env")
 logger = get_logger(__name__)
 
 
@@ -20,19 +24,35 @@ def get_clash_yaml(url, user_agent, proxy: str | None = None):
     logger.debug(f"Subscription:${response.headers['Subscription-Userinfo']}")
     remote_config = yaml.safe_load(response.text)
 
-    # 2. 获取以上yaml的proxies
     proxies = remote_config.get("proxies", [])
+    if not proxies:
+        logger.error("No proxies found in subscription.")
+        return
 
-    # 3. 读取"./template.yaml",template["proxy-providers"].append({type: inline,payload=<以上的proxies>})
-    with open("./template.yaml", "r", encoding="utf-8") as f:
-        template = yaml.safe_load(f)
+    try:
+        with open("./data/template.yaml", "r", encoding="utf-8") as f:
+            template = yaml.safe_load(f)
+    except yaml.YAMLError as e:
+        logger.error(f"Error parsing template.yaml: {e}")
+        return
+    except FileNotFoundError:
+        logger.error("template.yaml file not found")
+        return
 
-    # 添加proxies到proxy-providers
     if "proxy-providers" not in template:
         template["proxy-providers"] = []
 
     template["proxy-providers"].append({"type": "inline", "payload": proxies})
 
-    # 4. 将修改后的template写入"./gen.yaml"
-    with open("./mecli/gen.yaml", "w", encoding="utf-8") as f:
-        yaml.dump(template, f, allow_unicode=True, default_flow_style=False)
+    try:
+        with open("./data/gen.yaml", "w", encoding="utf-8") as f:
+            yaml.dump(template, f, allow_unicode=True, default_flow_style=False)
+    except Exception as e:
+        logger.error(f"Error writing to gen.yaml: {e}")
+
+
+if __name__ == "__main__":
+    get_clash_yaml(
+        os.getenv("GOUGOU_SUB_API"),
+        "clash-verge/v2.4.3",
+    )

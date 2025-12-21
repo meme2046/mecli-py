@@ -15,7 +15,7 @@
 	},
 	"window.commandCenter": false,
 	"git.autofetch": true,
-	"terminal.integrated.defaultProfile.windows": "nu",
+	"terminal.integrated.defaultProfile.windows": "pwsh",
 	"terminal.integrated.automationProfile.windows": {
 		"path": "c:/scoop/shims/pwsh.exe",
 		"args": []
@@ -46,8 +46,7 @@
 		"editor.codeActionsOnSave": {
 			"source.fixAll.ruff": "explicit", // 保存时自动修复可修复的 lint 错误
 			"source.organizeImports.ruff": "explicit" // 保存时自动排序 import 语句
-		},
-		
+		}
 	},
 	"python.analysis.typeCheckingMode": "standard",
 	"python.envFile": "${workspaceFolder}/.env",
@@ -103,7 +102,7 @@
 	},
 	"json.format.enable": true,
 	"workbench.iconTheme": "vscode-icons",
-	"workbench.colorTheme": "GitHub Light Colorblind (Beta)",
+	"workbench.colorTheme": "Noctis Obscuro",
 	"terminal.integrated.enableMultiLinePasteWarning": "auto",
 	// 📝vscode自带css规则配置
 	"css.validate": true,
